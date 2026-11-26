@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>MIASCS – Montalban Infirmary</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="app">
+
+
+
+<section id="login" class="screen">
+
+  <div class="logo"><b><i data-i="plus"></i></b>MIASCS</div>
+
+  <p class="eyebrow">MONTALBAN INFIRMARY</p>
+
+  <h1>Care starts here.</h1>
+
+  <p class="sub">Log in to book your visit and stay connected to Montalban Infirmary.</p>
+
+  <span class="lbl">Sign in as</span>
+
+  <div class="seg" id="role"><button class="on">Patient</button><button>Administrator</button></div>
+
+  <label class="lbl" for="u">Email or Username</label>
+
+  <input class="inp" id="u" placeholder="Enter email or username" autocomplete="username">
+
+  <label class="lbl" for="pw">Password</label>
+
+  <div class="pw"><input class="inp" id="pw" type="password" placeholder="Enter your password" autocomplete="current-password"><button type="button" id="show">Show</button></div>
+
+  <button class="btn" id="loginBtn">Login</button>
+
+  <p class="center">Don’t have an account? <a href="#register" data-go="register">Register</a></p>
+
+  <p class="center"><a href="#" data-t="Password reset link sent if the account exists" style="font-weight:400;color:var(--mu)">Forgot Password?</a></p>
+
+  <div class="note"><b>Your health information stays private</b><span>Secure access to appointments and emergency assistance, in one place.</span></div>
+
+</section>
+
+<section id="register" class="screen" hidden>
+  <div class="top"><button class="ib pl" data-go="login" aria-label="Back to login">←</button><h2>Create Account</h2><span></span></div>
+  <div class="logo"><b><i data-i="plus"></i></b>MIASCS</div>
+  <p class="eyebrow">PATIENT REGISTRATION</p>
+  <h1>Join MIASCS.</h1>
+  <p class="sub">Create a patient account to manage your infirmary visits.</p>
+  <form id="registerForm">
+    <label class="lbl" for="regName">Complete Name</label>
+    <input class="inp" id="regName" name="name" placeholder="e.g. Juan Dela Cruz" autocomplete="name" required>
+    <label class="lbl" for="regDob">Date of Birth</label>
+    <input class="inp" id="regDob" name="dob" type="date" required>
+    <label class="lbl" for="regSex">Sex</label>
+    <select class="inp" id="regSex" name="sex" required><option value="">Select sex</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select>
+    <label class="lbl" for="regPhone">Mobile Number</label>
+    <input class="inp" id="regPhone" name="phone" type="tel" placeholder="09XXXXXXXXX" autocomplete="tel" pattern="09[0-9]{9}" title="Enter an 11-digit Philippine mobile number starting with 09" required>
+    <label class="lbl" for="regEmail">Email Address</label>
+    <input class="inp" id="regEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+    <label class="lbl" for="regAddress">Home Address</label>
+    <input class="inp" id="regAddress" name="address" placeholder="Barangay, Municipality" autocomplete="street-address" required>
+    <label class="lbl" for="regUser">Username</label>
+    <input class="inp" id="regUser" name="username" minlength="4" placeholder="Choose a username" autocomplete="username" required>
+    <label class="lbl" for="regPassword">Password</label>
+    <input class="inp" id="regPassword" name="password" type="password" minlength="8" placeholder="At least 8 characters" autocomplete="new-password" required>
+    <label class="lbl" for="regConfirm">Confirm Password</label>
+    <input class="inp" id="regConfirm" name="confirmPassword" type="password" minlength="8" placeholder="Re-enter your password" autocomplete="new-password" required>
+    <label class="consent"><input type="checkbox" id="regConsent" required> I confirm that the information provided is accurate and agree to the handling of my information for appointment services.</label>
+    <button class="btn" type="submit">Create Patient Account</button>
+  </form>
+  <p class="center">Already have an account? <a href="#login" data-go="login">Log in</a></p>
+  <div class="note"><b>Privacy reminder</b><span>For this front-end demonstration, registration is not sent to a real hospital database. Do not enter real sensitive information.</span></div>
+</section>
+
+<section id="home" class="screen" hidden>
+
+  <div class="top"><div class="logo"><b><i data-i="plus"></i></b>MIASCS</div>
+
+    <div style="display:flex;gap:8px"><button class="ib red" data-t="Emergency line: calling the infirmary…" aria-label="Emergency"><i data-i="plus"></i></button><button class="ib" data-go="profile" data-account-initials>JS</button></div></div>
+
+  <div class="pin"><em>PINNED</em>Free Flu Vaccination this Friday<a href="#" data-t="Free flu vaccination: Friday, 8:00 AM to 3:00 PM">View ›</a></div>
+
+  <div class="hero"><small id="homeGreeting">YOUR HEALTH, YOUR SCHEDULE</small><h2>Book Appointment</h2><p>Schedule your visit in a few clicks.</p>
+
+    <button data-book>Book Appointment <i data-i="arrow"></i></button></div>
+
+  <div class="card" id="queueStatus"></div>
+
+  <div class="card" id="next"></div>
+
+  <div class="card"><div class="ch"><div class="ic"><i data-i="plus"></i></div><div><h3>Nurse on Duty</h3><small>Available for assistance</small></div></div>
+
+    <div class="nurse"><div class="ph">MS</div><div><b>Nurse Maria Santos</b><small>Registered Nurse</small><em>Available</em></div></div>
+
+    <div class="hours"><span>Infirmary hours</span><div><b>Monday–Saturday</b>7:00 AM – 6:00 PM</div></div></div>
+
+  <div class="sh"><h3>Quick Actions</h3><small>Everything you need, one tap away</small></div>
+
+  <div class="qa">
+
+    <button data-book><span class="ic"><i data-i="cal"></i></span>Book Appointment</button>
+
+    <button data-t="Certificate request form opens here"><span class="ic"><i data-i="file"></i></span>Request Certificate</button>
+
+    <button data-t="Your health records open here"><span class="ic"><i data-i="plus"></i></span>View Health Records</button>
+
+    <button data-t="Contact: Montalban Infirmary front desk"><span class="ic"><i data-i="phone"></i></span>Contact Infirmary</button></div>
+
+  <div class="sh flex"><div><h3>Latest Announcements</h3><small>Updates from Montalban Infirmary</small></div><a href="#" data-t="All announcements open here">See all ›</a></div>
+
+  <div class="ann"><div class="m"><span class="tag">HEALTH ADVISORY</span>Oct. 14, 2026</div><h4>Free flu vaccination this Friday</h4><p>Available for registered patients from 8:00 AM to 3:00 PM.</p><a href="#" data-t="Full announcement opens here">Read more ›</a></div>
+
+  <div class="ann"><div class="m"><span class="tag b">VACCINATION DRIVE</span>Oct. 12, 2026</div><h4>Community vaccination registration is open</h4><p>Reserve a slot for the October community vaccination drive.</p><a href="#" data-t="Full announcement opens here">Read more ›</a></div>
+
+  <div class="ann"><div class="m"><span class="tag o">SCHEDULE CHANGE</span>Oct. 10, 2026</div><h4>Updated outpatient clinic hours</h4><p>The outpatient department is now open Monday to Saturday.</p><a href="#" data-t="Full announcement opens here">Read more ›</a></div>
+
+  <div class="tip"><div class="ic"><i data-i="plus"></i></div><div><small>HEALTH TIP OF THE DAY</small><h4>Stay hydrated</h4><p>Drink 6–8 glasses of water daily to help your body function at its best.</p></div></div>
+
+</section>
+
+
+
+<section id="appointments" class="screen" hidden>
+
+  <div class="top"><button class="ib pl" data-go="home" aria-label="Back"><i data-i="arrow" style="transform:scaleX(-1)"></i></button><h2>My Appointments</h2><button class="ib" data-go="profile" data-account-initials>JS</button></div>
+
+  <button class="btn" type="button" data-book>Book an appointment</button>
+
+  <form id="bookingForm" class="card" hidden>
+    <label class="lbl" for="bookDoctor">Doctor</label>
+    <select class="inp" id="bookDoctor" required>
+      <option value="">Choose a doctor</option>
+    </select>
+    <label class="lbl" for="bookDate">Date</label>
+    <input class="inp" id="bookDate" type="date" required>
+    <label class="lbl" for="bookTime">Time</label>
+    <input class="inp" id="bookTime" type="time" required>
+    <button class="btn" type="submit">Confirm appointment</button>
+    <button id="cancelBooking" type="button">Cancel</button>
+  </form>
+
+  <div class="tabs" id="tabs"><button class="on" data-k="up">Upcoming</button><button data-k="past">Past</button><button data-k="cx">Canceled</button></div>
+
+  <div class="cnt"><h3 id="ctitle"></h3><small id="ccount"></small></div>
+
+  <div id="list"></div>
+
+  <div class="note"><b>Planning your visit</b><span>Tap an appointment to view your visit details and queue number.</span></div>
+
+</section>
+
+
+
+<section id="profile" class="screen" hidden>
+
+  <div class="top"><button class="ib pl" data-t="Menu"><i data-i="menu"></i></button><h2>Profile</h2><button class="ib" data-account-initials>JS</button></div>
+
+  <div class="prof"><div class="av" data-account-initials>JS</div><div><h2 id="profileUsername">Username</h2><small id="patientCode">Patient ID</small></div></div>
+
+  <div class="sh"><h3 style="font-size:16px">Settings</h3></div>
+
+  <div class="set">
+
+    <button data-t="Edit your name and contact details"><span><b>Personal Information</b><small>Update your name and contact details</small></span><i data-i="chev"></i></button>
+
+    <button data-t="Change your password"><span><b>Password &amp; Security</b><small>Manage your password and account access</small></span><i data-i="chev"></i></button>
+
+    <div><span><b>Appointment Reminders</b><small>Get reminders before scheduled visits</small></span><button class="sw" id="rem" role="switch" aria-checked="true" aria-label="Appointment reminders"></button></div>
+
+  </div>
+
+  <button class="out" id="logout">Log Out</button>
+
+  <p class="ver">MIASCS - Version 1.0</p>
+
+</section>
+
+<section id="admin" class="screen admin-screen" hidden>
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <b><i data-i="plus"></i></b>
+        <span>MIASCS<small>ADMIN CONSOLE</small></span>
+      </div>
+      <p class="admin-nav-label">WORKSPACE</p>
+      <button class="active" type="button" data-admin-panel="overview">Overview</button>
+      <button type="button" data-admin-panel="appointments">Appointments</button>
+      <button type="button" data-admin-panel="users">Patient accounts</button>
+      <button id="adminLogout" type="button">Log out</button>
+    </aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <p class="admin-eyebrow">MONTALBAN INFIRMARY / ADMIN</p>
+          <h1 id="adminTitle">Overview</h1>
+        </div>
+        <button id="adminRefresh" class="admin-refresh" type="button">Refresh data</button>
+      </header>
+      <p id="adminMessage" class="admin-message" role="status" hidden></p>
+
+      <section id="adminOverview" class="admin-panel">
+        <div class="admin-stats">
+          <article class="admin-stat"><span>Total appointments</span><b id="adminAppointmentCount">0</b></article>
+          <article class="admin-stat"><span>Confirmed bookings</span><b id="adminUpcomingCount">0</b></article>
+          <article class="admin-stat"><span>Patient accounts</span><b id="adminPatientCount">0</b></article>
+          <article class="admin-stat"><span>Deactivated accounts</span><b id="adminInactiveCount">0</b></article>
+        </div>
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <div><h2>Recent appointments</h2><p>Latest bookings across the clinic</p></div>
+            <button type="button" data-admin-panel="appointments">View all</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Patient</th><th>Doctor</th><th>Department</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody id="adminRecentRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="adminAppointments" class="admin-panel" hidden>
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <div><h2>Appointment management</h2><p>Review and cancel patient bookings</p></div>
+            <div class="admin-filters">
+              <input id="appointmentSearch" type="search" placeholder="Search patient or doctor" aria-label="Search appointments">
+              <select id="appointmentStatusFilter" aria-label="Filter appointments">
+                <option value="all">All statuses</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Canceled</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Patient</th><th>Doctor</th><th>Department</th><th>Date &amp; time</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="adminAppointmentRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="adminUsers" class="admin-panel" hidden>
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <div><h2>Patient accounts</h2><p>Search, deactivate, reactivate, or remove accounts</p></div>
+            <div class="admin-filters">
+              <input id="userSearch" type="search" placeholder="Search name, username, or email" aria-label="Search patient accounts">
+              <select id="userStatusFilter" aria-label="Filter patient accounts">
+                <option value="all">All accounts</option>
+                <option value="active">Active</option>
+                <option value="inactive">Deactivated</option>
+              </select>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead><tr><th>Patient</th><th>Username</th><th>Contact</th><th>Patient ID</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="adminUserRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+</section>
+
+<nav id="nav" hidden>
+
+  <button data-go="home"><i data-i="home"></i>Home</button>
+
+  <button data-go="appointments"><i data-i="cal"></i>Appointments</button>
+
+  <button data-go="profile"><i data-i="user"></i>Profile</button>
+
+</nav>
+
+</div>
+
+<div id="toast" role="status"></div>
+
+
+
+
+
+<script type="module" src="script.js"></script>
+</body>
+
+</html>
